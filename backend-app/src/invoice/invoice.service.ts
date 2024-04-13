@@ -4,8 +4,9 @@ import { InvoiceDAO } from 'src/database/invoice.dao';
 @Injectable()
 export class InvoiceService {
   constructor(private invoiceDAO: InvoiceDAO) {}
+
   async aggregateAmountOfTotals() {
-    return 'total';
+    return this.invoiceDAO.sumOfAmount();
   }
 
   async getInvoice(id: string) {
@@ -13,6 +14,6 @@ export class InvoiceService {
   }
 
   async getAllInvoices() {
-    return 'all';
+    return this.invoiceDAO.findAll();
   }
 }
