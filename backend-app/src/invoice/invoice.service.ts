@@ -9,4 +9,8 @@ export class InvoiceService {
   async getInvoice(id: string) {
     return id;
   }
+
+  async getAllInvoices() {
+    return 'all';
+  }
 }

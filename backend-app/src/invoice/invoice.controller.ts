@@ -14,4 +14,9 @@ export class InvoiceController {
   async getInvoice(@Param('id') id: string) {
     return this.invoiceService.getInvoice(id);
   }
+
+  @Get()
+  async getAllInvoices() {
+    return this.invoiceService.getAllInvoices();
+  }
 }
