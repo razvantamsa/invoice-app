@@ -1,7 +1,17 @@
-import { Controller } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
 
-@Controller('invoice')
+@Controller('invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
+
+  @Get('total')
+  async aggregateAmountOfTotals() {
+    return this.invoiceService.aggregateAmountOfTotals();
+  }
+
+  @Get(':id')
+  async getInvoice(@Param('id') id: string) {
+    return this.invoiceService.getInvoice(id);
+  }
 }
