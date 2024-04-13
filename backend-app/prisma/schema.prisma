@@ -14,7 +14,7 @@ datasource db {
 }
 
 model User {
-  id       Int       @id @default(autoincrement())
+  id       String    @id @default(cuid())
   email    String    @unique
   password String
   name     String
@@ -25,13 +25,13 @@ model User {
 }
 
 model Invoice {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(cuid())
   vendor_name String
   amount      Float
   due_date    DateTime
   description String?
   paid        Boolean
-  user_id     Int
+  user_id     String
 
   // Relationships
   user User @relation(fields: [user_id], references: [id])
