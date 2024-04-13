@@ -1,6 +1,6 @@
 version: "3"
 services:
-  gateway:
+  inv_app_backend:
     container_name: inv_app_backend
     build:
       context: backend-app
@@ -10,3 +10,18 @@ services:
       - NODE_ENV=local
     volumes:
       - ./backend-app:/app
+
+  postgres:
+    image: postgres:latest
+    container_name: inv_app_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
