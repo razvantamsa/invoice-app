@@ -1,0 +1,12 @@
+version: "3"
+services:
+  gateway:
+    container_name: inv_app_backend
+    build:
+      context: backend-app
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=local
+    volumes:
+      - ./backend-app:/app
