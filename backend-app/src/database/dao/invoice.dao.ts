@@ -10,8 +10,16 @@ export class InvoiceDAO {
     return this.prisma.invoice.findUnique({ where: { id, user_id: userId } });
   }
 
-  async findAll(userId: string): Promise<Invoice[]> {
-    return this.prisma.invoice.findMany({ where: { user_id: userId } });
+  async findAll(
+    userId: string,
+    offset: number,
+    limit: number,
+  ): Promise<Invoice[]> {
+    return this.prisma.invoice.findMany({
+      where: { user_id: userId },
+      skip: offset,
+      take: limit,
+    });
   }
 
   async sumOfAmount(userId: string): Promise<number> {
