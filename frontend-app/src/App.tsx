@@ -4,8 +4,9 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import Invoice from './Invoice';
-import Home from './Home';
+import Invoice from './pages/Invoice';
+import Home from './pages/Home';
+import _404 from './pages/404';
 
 const App: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" Component={Home} />
         <Route path="/invoice" Component={Invoice} />
+        <Route path="*" Component={_404} />
       </Routes>
     </BrowserRouter>
   );
