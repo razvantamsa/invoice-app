@@ -14,8 +14,4 @@ export class AuthService {
     }
     return null;
   }
-
-  async login() {
-    return 'logging in';
-  }
 }
