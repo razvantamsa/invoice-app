@@ -14,10 +14,8 @@ services:
   postgres:
     image: postgres:latest
     container_name: inv_app_postgres
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: mydatabase
+    env_file:
+      - ./development/.env.secrets
     ports:
       - "5432:5432"
     volumes:
