@@ -15,7 +15,7 @@ while [[ $# -gt 0 ]]; do
             exit 0
         ;;
         stop)
-            docker compose --env-file /dev/null down
+            docker compose --env-file /dev/null down "${@:2}"
             exit 0
         ;;
         migrate)
@@ -28,6 +28,7 @@ while [[ $# -gt 0 ]]; do
         ;;
         seed)
             docker exec -it inv_app_backend npx ts-node seeding.script.ts
+            exit 0
         ;;
         *)
             echo "Unknown parameter: ${1}"
