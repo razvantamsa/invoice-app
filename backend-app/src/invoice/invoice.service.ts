@@ -5,15 +5,15 @@ import { InvoiceDAO } from 'src/database/dao/invoice.dao';
 export class InvoiceService {
   constructor(private invoiceDAO: InvoiceDAO) {}
 
-  async aggregateAmountOfTotals() {
-    return this.invoiceDAO.sumOfAmount();
+  async aggregateAmountOfTotals(userId: string) {
+    return this.invoiceDAO.sumOfAmount(userId);
   }
 
-  async getInvoice(id: string) {
-    return this.invoiceDAO.findOne(id);
+  async getInvoice(id: string, userId: string) {
+    return this.invoiceDAO.findOne(id, userId);
   }
 
-  async getAllInvoices() {
-    return this.invoiceDAO.findAll();
+  async getAllInvoices(userId: string) {
+    return this.invoiceDAO.findAll(userId);
   }
 }

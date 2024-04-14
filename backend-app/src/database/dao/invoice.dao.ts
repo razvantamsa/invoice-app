@@ -6,16 +6,19 @@ import { Invoice } from '@prisma/client';
 export class InvoiceDAO {
   constructor(private prisma: Prisma) {}
 
-  async findOne(id: string): Promise<Invoice | null> {
-    return this.prisma.invoice.findUnique({ where: { id } });
+  async findOne(id: string, userId: string): Promise<Invoice | null> {
+    return this.prisma.invoice.findUnique({ where: { id, user_id: userId } });
   }
 
-  async findAll(): Promise<Invoice[]> {
-    return this.prisma.invoice.findMany();
+  async findAll(userId: string): Promise<Invoice[]> {
+    return this.prisma.invoice.findMany({ where: { user_id: userId } });
   }
 
-  async sumOfAmount(): Promise<number> {
+  async sumOfAmount(userId: string): Promise<number> {
     const result = await this.prisma.invoice.aggregate({
+      where: {
+        user_id: userId,
+      },
       _sum: {
         amount: true,
       },
