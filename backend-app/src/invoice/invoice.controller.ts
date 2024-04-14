@@ -1,12 +1,15 @@
 import { Controller, Get, Param, Request } from '@nestjs/common';
 import { InvoiceService } from './invoice.service';
+import { UserRequestDto } from 'src/common/user-request.dto';
 
 @Controller('invoices')
 export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 
   @Get('total')
-  async aggregateAmountOfTotals(@Request() req) {
+  async aggregateAmountOfTotals(
+    @Request() req: { user: Required<UserRequestDto> },
+  ) {
     return this.invoiceService.aggregateAmountOfTotals(req.user.userId);
   }
 
@@ -16,7 +19,7 @@ export class InvoiceController {
   }
 
   @Get()
-  async getAllInvoices(@Request() req) {
+  async getAllInvoices(@Request() req: { user: Required<UserRequestDto> }) {
     return this.invoiceService.getAllInvoices(req.user.userId);
   }
 }
