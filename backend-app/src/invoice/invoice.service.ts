@@ -13,7 +13,7 @@ export class InvoiceService {
     return this.invoiceDAO.findOne(id, userId);
   }
 
-  async getAllInvoices(userId: string) {
-    return this.invoiceDAO.findAll(userId);
+  async getAllInvoices(userId: string, offset: number, limit: number) {
+    return this.invoiceDAO.findAll(userId, offset, limit);
   }
 }
