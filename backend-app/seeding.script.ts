@@ -2,11 +2,14 @@ import { User, PrismaClient } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import 'dotenv/config';
 
-const { DATABASE_URL } = process.env;
-console.log(DATABASE_URL);
+import BcryptUtils from './src/common/bcrypt.utils';
 
-if (!DATABASE_URL) {
-  throw new Error('DATABASE_URL is not defined in the environment variables');
+const { DATABASE_URL, BCRYPT_SALTROUNDS, BCRYPT_PEPPER } = process.env;
+
+if (!DATABASE_URL || !BCRYPT_SALTROUNDS || !BCRYPT_PEPPER) {
+  throw new Error(
+    'Environment variables not set, required: DATABASE_URL, BCRYPT_SALTROUNDS, BCRYPT_PEPPER',
+  );
 }
 
 const prisma = new PrismaClient({
@@ -30,7 +33,11 @@ async function seedUsers(): Promise<User[]> {
       data: {
         email: `user${uuid}@example.com`,
         name: `User ${uuid}`,
-        password: 'password',
+        password: await BcryptUtils.hashPassword(
+          'password',
+          parseInt(BCRYPT_SALTROUNDS),
+          BCRYPT_PEPPER,
+        ),
       },
     });
 
