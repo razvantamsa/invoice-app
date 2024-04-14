@@ -9,7 +9,6 @@ export class PaginationMiddleware implements NestMiddleware {
     req.query.offset = String(parseInt(offset as any));
     req.query.limit = String(parseInt(limit as any));
 
-    console.log(req.query);
     next();
   }
 }
