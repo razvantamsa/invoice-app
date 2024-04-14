@@ -11,6 +11,14 @@ services:
     volumes:
       - ./backend-app:/app
 
+  inv_app_frontend:
+    container_name: inv_app_frontend
+    build:
+      context: frontend-app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+
   postgres:
     image: postgres:latest
     container_name: inv_app_postgres
