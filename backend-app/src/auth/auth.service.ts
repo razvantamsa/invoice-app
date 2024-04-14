@@ -1,17 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { UserDAO } from 'src/database/dao/user.dao';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
-  constructor(private userDAO: UserDAO) {}
+  constructor(private jwtService: JwtService) {}
 
-  async validateUser(email: string, password: string) {
-    const user = await this.userDAO.findOne(email);
-    if (user && user.password === password) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      const { password, ...result } = user;
-      return result;
-    }
-    return null;
+  async login() {
+    return true;
   }
 }
