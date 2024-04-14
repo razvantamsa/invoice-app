@@ -11,7 +11,7 @@ if (!DATABASE_URL) {
 const prisma = new PrismaClient({
   datasources: {
     db: {
-      url: DATABASE_URL.replace('inv_app_postgres', 'localhost'),
+      url: DATABASE_URL,
     },
   },
 });
