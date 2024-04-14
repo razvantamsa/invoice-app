@@ -8,8 +8,4 @@ export class AuthController {
   async login() {
     return this.authService.login();
   }
-
-  async signup() {
-    return this.authService.signup();
-  }
 }

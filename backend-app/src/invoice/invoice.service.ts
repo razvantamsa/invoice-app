@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { InvoiceDAO } from 'src/database/invoice.dao';
+import { InvoiceDAO } from 'src/database/dao/invoice.dao';
 
 @Injectable()
 export class InvoiceService {
