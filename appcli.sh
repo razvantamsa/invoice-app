@@ -10,8 +10,12 @@ cd ${CWD}
 
 while [[ $# -gt 0 ]]; do
     case "${1}" in
-        echo)
-            echo 'hello'
+        start)
+            docker compose --env-file /dev/null up "${@:2}"
+            exit 0
+        ;;
+        stop)
+            docker compose --env-file /dev/null down
             exit 0
         ;;
         *)
