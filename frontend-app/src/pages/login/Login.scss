@@ -17,33 +17,33 @@
   form {
     display: flex;
     flex-direction: column;
-    justify-content: center; 
+    justify-content: center;
     height: 100%;
     width: 100%;
-  
-      .form-group {
-        width: 80%;
-        align-self: center;
 
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
+    .form-group {
+      width: 80%;
+      align-self: center;
 
-          label {
-            display: block;
-            margin-bottom: 5px;
-          }
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
 
-          input[type='email'],
-          input[type='password'] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            border: 1px solid #ccc;
-            background-color: #ccc;
-            box-sizing: border-box;
-          }
+      label {
+        display: block;
+        margin-bottom: 5px;
       }
+
+      input[type="email"],
+      input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        background-color: #ccc;
+        box-sizing: border-box;
+      }
+    }
   }
 
   .login-button {
@@ -54,14 +54,14 @@
     align-self: center;
 
     padding: 10px;
-    background-color: var(--purple-800);   
+    background-color: var(--purple-800);
     color: #ffffff;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    
+
     &:hover {
-        background-color: var(--purple-900);   
+      background-color: var(--purple-900);
     }
   }
 }
