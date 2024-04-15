@@ -21,6 +21,7 @@ const Login: React.FC = () => {
             <input
               type="email"
               id="email"
+              autoComplete="off"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
