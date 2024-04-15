@@ -1,18 +1,24 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+
 import "./Login.scss";
 import loginUser from "../../utils/requests";
+import { loginFailure, loginSuccess } from "../../state/auth.slice";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const dispatch = useDispatch();
 
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
       console.log("Login successful:", data);
+      dispatch(loginSuccess(data.accessToken));
     },
-    onError: (error) => {
+    onError: (error: { message: string }) => {
       console.error("Login error:", error);
+      dispatch(loginFailure(error.message));
     },
   });
 
