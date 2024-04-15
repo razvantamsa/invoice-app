@@ -1,16 +1,45 @@
 import React, { useState } from "react";
+import { useMutation } from "react-query";
 import "./Login.scss";
+
+const loginUser = async ({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) => {
+  const response = await fetch("http://localhost:3000/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username: email, password }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Login failed");
+  }
+
+  return response.json();
+};
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
+  const mutation = useMutation(loginUser, {
+    onSuccess: (data) => {
+      console.log("Login successful:", data);
+    },
+    onError: (error) => {
+      console.error("Login error:", error);
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
-    console.log("here");
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
-    throw new Error("xxx");
+    mutation.mutate({ email, password });
   };
 
   return (
