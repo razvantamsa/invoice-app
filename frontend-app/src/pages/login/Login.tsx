@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Login.css'
+import './Login.scss'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -14,6 +14,7 @@ const Login: React.FC = () => {
   return (
     <div className="login-container">
         <h2>Login</h2>
+
         <form onSubmit={handleSubmit}>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
