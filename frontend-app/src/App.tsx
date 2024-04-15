@@ -7,7 +7,7 @@ import {
 import Invoice from './pages/Invoice';
 import Home from './pages/Home';
 import _404 from './pages/404';
-import Login from './pages/Login';
+import Login from './pages/login/Login';
 
 const App: React.FC = () => {
   return (

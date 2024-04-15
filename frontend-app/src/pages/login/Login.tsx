@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Login.css'
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -12,7 +13,6 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container">
-      <div className="login-card">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -35,11 +35,12 @@ const Login: React.FC = () => {
               required
             />
           </div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
+          <div className='form-group'>
+            <button type="submit" className="login-button">
+              Login
+            </button>
+          </div>
         </form>
-      </div>
     </div>
   );
 };
