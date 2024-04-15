@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import ErrorBoundaryPage from "./ErrorBoundaryPage";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -10,7 +11,7 @@ interface ErrorBoundaryState {
   errorInfo?: ErrorInfo;
 }
 
-export class ErrorBoundary extends Component<
+export default class ErrorBoundary extends Component<
   ErrorBoundaryProps,
   ErrorBoundaryState
 > {
@@ -29,17 +30,7 @@ export class ErrorBoundary extends Component<
 
   render(): ReactNode {
     if (this.state.hasError) {
-      return (
-        <div style={{ textAlign: "center", padding: "20px" }}>
-          <h1>Something went wrong...</h1>
-          <p>Please try again later or contact support.</p>
-          {process.env.NODE_ENV !== "production" && (
-            <details style={{ whiteSpace: "pre-wrap", marginTop: "20px" }}>
-              {this.state.errorInfo?.componentStack}
-            </details>
-          )}
-        </div>
-      );
+      return <ErrorBoundaryPage errorInfo={this.state.errorInfo} />;
     }
 
     return this.props.children;
