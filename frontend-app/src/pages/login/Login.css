@@ -29,10 +29,7 @@ form {
 
   display: flex;
   flex-direction: column;
-  justify-content: center; 
-  align-content: center;
   margin-bottom: 15px;
-  box-sizing: border-box;
 }
 
 label {
@@ -47,12 +44,14 @@ input[type='password'] {
   border-radius: 4px;
   border: 1px solid #ccc;
   background-color: #ccc;
+  box-sizing: border-box;
 }
 
 .login-button {
   box-sizing: border-box;
 
-  width: 100%;
+  width: 50%;
+  height: min(100%, 50px);
   align-self: center;
 
   padding: 10px;

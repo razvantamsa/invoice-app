@@ -35,11 +35,9 @@ const Login: React.FC = () => {
               required
             />
           </div>
-          <div className='form-group'>
-            <button type="submit" className="login-button">
-              Login
-            </button>
-          </div>
+          <button type="submit" className="login-button">
+            Login
+          </button>
         </form>
     </div>
   );
