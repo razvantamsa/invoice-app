@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Invoice from './pages/Invoice';
 import Home from './pages/Home';
-import _404 from './pages/404';
+import _404 from './pages/404/404';
 import Login from './pages/login/Login';
 
 const App: React.FC = () => {
