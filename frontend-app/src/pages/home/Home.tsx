@@ -1,8 +1,9 @@
 import React from 'react';
+import './Home.css';
 
 const Main: React.FC = () => {
   return (
-    <div>
+    <div className='home-container'>
       <h1>Main Page</h1>
       <p>Welcome to the home page!</p>
     </div>
