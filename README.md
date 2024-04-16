@@ -11,6 +11,7 @@
 - Seeded the database using a script.
 - Implemented error handling with an exception filter.
 - Created a pagination middleware for fetching all invoices.
+- Implemented password encryption with `bcrypt`
 
 ## Frontend Features
 - Login page.
@@ -25,11 +26,22 @@
 - Docker Compose configuration for orchestrating frontend, backend, and database services.
 
 ## How to Run
+### Before running, you must set up your environmental variables.
+- `development/.env.secrets`: create file and fill with values based on template in `development/.env.secrets.template`
+
+- `backend-app/.env`: create file and fill with values based on template in `backend-app/.env.template` 
+    - `DATABASE_URL`: must follow the structure, matching the values in `.env.secrets` -> <b>postgresql://<POSTGRES_USER>:<POSTGRES_PASSWORD>@inv_app_postgres:5432/<POSTGRES_DB>?schema=public</b>
+    - `PASSPORT_SECRET` must be a string
+    - `BCRYPT_SALTROUNDS` must be a number
+    - `BCRYPT_PEPPER` must be a string
+
 ```bash
 appcli start --build
 appcli migrate init
 appcli seed
 ```
+- API URL - localhost:3000
+- WEB URL - localhost:8080
 
 ## Auth Credentials
 - Email: user1@example.com
