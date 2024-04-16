@@ -1,0 +1,16 @@
+.invoice-item {
+  background-color: #f4f4f4;
+  border-bottom: 1px solid var(--purple-200);
+
+  &:last-child {
+    border-bottom: none;
+  }
+  &:hover {
+    cursor: pointer;
+    background-color: var(--purple-100);
+  }
+
+  td {
+    padding: 10px 12px;
+  }
+}
