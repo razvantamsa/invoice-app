@@ -10,6 +10,7 @@ import PaginationItem from "./PaginationItem";
 import { getInvoices } from "../../utils/requests";
 import IState from "../../state/state.interface";
 import { logout } from "../../state/auth.slice";
+import PopupModal from "../popup-modal/PopupModal";
 
 const PAGE_SIZE = 5;
 
@@ -21,6 +22,8 @@ const InvoiceTable: React.FC = () => {
   const [prevOffset, setPrevOffset] = useState<number>(0);
   const [shouldRefetch, setShouldRefetch] = useState<boolean>(true);
 
+  const [isModalOpen, setIsModalOpen] = useState<Invoice | null>(null);
+
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
   const { data, error, refetch }: any = useQuery(
@@ -29,7 +32,7 @@ const InvoiceTable: React.FC = () => {
       return getInvoices({
         accessToken: accessToken || "",
         offset,
-        limit: offset + PAGE_SIZE,
+        limit: PAGE_SIZE,
       });
     },
     {
@@ -73,7 +76,11 @@ const InvoiceTable: React.FC = () => {
         </thead>
         <tbody>
           {invoices.map((invoice) => (
-            <InvoiceItem key={invoice.id} invoice={invoice} />
+            <InvoiceItem
+              key={invoice.id}
+              invoice={invoice}
+              setIsModalOpen={setIsModalOpen}
+            />
           ))}
         </tbody>
       </table>
@@ -83,6 +90,9 @@ const InvoiceTable: React.FC = () => {
         setPrevOffset={setPrevOffset}
         setShouldRefetch={setShouldRefetch}
       />
+      {isModalOpen && (
+        <PopupModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      )}
     </div>
   );
 };
