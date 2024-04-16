@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import "./Login.scss";
 import loginUser from "../../utils/requests";
 import { loginFailure, loginSuccess } from "../../state/auth.slice";
+import Navbar from "../../components/navbar/Navbar";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -13,11 +14,9 @@ const Login: React.FC = () => {
 
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
-      console.log("Login successful:", data);
       dispatch(loginSuccess(data.access_token));
     },
     onError: (error: { message: string }) => {
-      console.error("Login error:", error);
       dispatch(loginFailure(error.message));
     },
   });
@@ -29,6 +28,8 @@ const Login: React.FC = () => {
 
   return (
     <div className="login-container">
+      <Navbar />
+
       <h2>Login</h2>
 
       <form onSubmit={handleSubmit}>

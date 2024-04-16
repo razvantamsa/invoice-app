@@ -14,19 +14,21 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action: PayloadAction<string>) => {
-      console.log(state, action);
       state.accessToken = action.payload;
       state.error = null;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
-      console.log(state, action);
       state.accessToken = null;
       state.error = action.payload;
+    },
+    logout: (state) => {
+      state.accessToken = null;
+      state.error = null;
     },
   },
 });
 
 const authReducer = authSlice.reducer;
 
-export const { loginSuccess, loginFailure } = authSlice.actions;
+export const { loginSuccess, loginFailure, logout } = authSlice.actions;
 export default authReducer;

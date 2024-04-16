@@ -10,6 +10,10 @@ const cookie: Middleware =
       Cookies.set("accessToken", state.auth.accessToken);
     }
 
+    if (action.type === "auth/logout" && state.auth.accessToken) {
+      Cookies.remove("accessToken");
+    }
+
     return next(action);
   };
 
