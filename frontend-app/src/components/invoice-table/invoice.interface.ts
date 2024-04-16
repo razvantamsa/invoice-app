@@ -1,8 +1,8 @@
 export interface Invoice {
   id: number;
-  payee: string;
-  date: string;
+  vendor_name: string;
+  due_date: string;
   description: string;
   amount: number;
-  status: string;
+  paid: boolean;
 }

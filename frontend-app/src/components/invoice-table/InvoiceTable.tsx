@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./InvoiceTable.scss";
-// import testInvoices from "./dummy.data";
 import InvoiceItem from "./InvoiceItem";
 import { Invoice } from "./invoice.interface";
 import PaginationItem from "./PaginationItem";

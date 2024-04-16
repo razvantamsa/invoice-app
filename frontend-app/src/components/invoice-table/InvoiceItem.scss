@@ -12,5 +12,16 @@
 
   td {
     padding: 10px 12px;
+    word-wrap: break-word;
+    border-left: 1px solid var(--purple-200);
+    border-right: 1px solid var(--purple-200);
+
+    &:first-of-type {
+      border-left: none;
+    }
+
+    &:last-of-type {
+      border-right: none;
+    }
   }
 }
