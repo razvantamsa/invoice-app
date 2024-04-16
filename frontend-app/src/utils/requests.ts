@@ -41,7 +41,12 @@ const getInvoices = async ({
   );
 
   if (!response.ok) {
-    throw new Error("Fetch failed");
+    throw new Error(
+      JSON.stringify({
+        statusText: response.statusText,
+        status: response.status,
+      })
+    );
   }
 
   return response.json();

@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState } from "react";
 import { useQuery } from "react-query";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./InvoiceTable.scss";
 // import testInvoices from "./dummy.data";
@@ -9,15 +10,18 @@ import { Invoice } from "./invoice.interface";
 import PaginationItem from "./PaginationItem";
 import { getInvoices } from "../../utils/requests";
 import IState from "../../state/state.interface";
+import { logout } from "../../state/auth.slice";
 
 const PAGE_SIZE = 5;
 
 const InvoiceTable: React.FC = () => {
   const { accessToken } = useSelector((state: IState) => state.auth);
+  const dispatch = useDispatch();
+
   const [offset, setOffset] = useState<number>(0);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
-  const { data, isLoading, isError, refetch } = useQuery(
+  const { data, isLoading, isError, error, refetch }: any = useQuery(
     [offset, offset, PAGE_SIZE],
     () =>
       getInvoices({
@@ -29,19 +33,19 @@ const InvoiceTable: React.FC = () => {
       enabled: false,
     }
   );
-  console.log(data);
 
   useEffect(() => {
     refetch();
-    // const fetchedInvoices = [...testInvoices].slice(offset, offset + PAGE_SIZE);
-    // setInvoices(fetchedInvoices);
   }, [refetch]);
 
   useEffect(() => {
     if (!isLoading && !isError && data) {
       setInvoices(data);
     }
-  }, [data, isLoading, isError]);
+    if (isError && JSON.parse(error.message).status) {
+      dispatch(logout());
+    }
+  }, [data, isLoading, isError, error, dispatch]);
 
   return (
     <div className="invoice-table-container">
