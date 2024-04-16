@@ -6,23 +6,31 @@ import "./PaginationItem.scss";
 interface PaginationItemProps {
   offset: number;
   setOffset: Dispatch<SetStateAction<number>>;
+  setPrevOffset: Dispatch<SetStateAction<number>>;
+  setShouldRefetch: Dispatch<SetStateAction<boolean>>;
 }
 
 const PaginationItem: React.FC<PaginationItemProps> = ({
   offset,
   setOffset,
+  setPrevOffset,
+  setShouldRefetch,
 }: PaginationItemProps) => {
   function changePagination(action: string) {
     if (action === "next") {
       const newOffset = offset + 5;
+      setPrevOffset(offset);
       setOffset(newOffset);
+      setShouldRefetch(true);
     }
     if (action === "prev") {
       const newOffset = offset - 5;
       if (newOffset < 0) {
         return;
       }
+      setPrevOffset(offset);
       setOffset(newOffset);
+      setShouldRefetch(true);
     }
   }
 

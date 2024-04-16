@@ -30,7 +30,7 @@ const getInvoices = async ({
   limit: number;
 }) => {
   const response = await fetch(
-    `http://localhost:3000/invoices?skip=${offset}&limit=${limit}`,
+    `http://localhost:3000/invoices?offset=${offset}&limit=${limit}`,
     {
       method: "GET",
       headers: {

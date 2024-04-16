@@ -18,33 +18,45 @@ const InvoiceTable: React.FC = () => {
   const dispatch = useDispatch();
 
   const [offset, setOffset] = useState<number>(0);
+  const [prevOffset, setPrevOffset] = useState<number>(0);
+  const [shouldRefetch, setShouldRefetch] = useState<boolean>(true);
+
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
-  const { data, isLoading, isError, error, refetch }: any = useQuery(
-    [offset, offset, PAGE_SIZE],
-    () =>
-      getInvoices({
+  const { data, error, refetch }: any = useQuery(
+    [accessToken, offset],
+    () => {
+      return getInvoices({
         accessToken: accessToken || "",
         offset,
         limit: offset + PAGE_SIZE,
-      }),
+      });
+    },
     {
       enabled: false,
     }
   );
 
   useEffect(() => {
-    refetch();
-  }, [refetch]);
+    if (shouldRefetch) {
+      refetch();
+      setShouldRefetch(false);
+    }
+  }, [shouldRefetch, refetch]);
 
   useEffect(() => {
-    if (!isLoading && !isError && data) {
+    if (data) {
+      if (!data.length) {
+        setShouldRefetch(false);
+        setOffset(prevOffset);
+        return;
+      }
       setInvoices(data);
     }
-    if (isError && JSON.parse(error.message).status) {
+    if (error && JSON.parse(error.message).status) {
       dispatch(logout());
     }
-  }, [data, isLoading, isError, error, dispatch]);
+  }, [data, error, dispatch, prevOffset]);
 
   return (
     <div className="invoice-table-container">
@@ -52,7 +64,7 @@ const InvoiceTable: React.FC = () => {
         <thead className="invoice-table-head">
           <tr>
             <th>ID</th>
-            <th>Payee</th>
+            <th>Vendor</th>
             <th>Due Date</th>
             <th>Description</th>
             <th>Amount</th>
@@ -65,7 +77,12 @@ const InvoiceTable: React.FC = () => {
           ))}
         </tbody>
       </table>
-      <PaginationItem offset={offset} setOffset={setOffset} />
+      <PaginationItem
+        offset={offset}
+        setOffset={setOffset}
+        setPrevOffset={setPrevOffset}
+        setShouldRefetch={setShouldRefetch}
+      />
     </div>
   );
 };
