@@ -11,11 +11,11 @@ const App: React.FC = () => {
     <Routes>
       <Route element={<ProtectedRoute authRequired={true} />}>
         <Route path="/invoice" Component={InvoicePage} />
+        <Route path="*" Component={_404} />
       </Route>
       <Route element={<ProtectedRoute authRequired={false} />}>
         <Route path="/login" Component={Login} />
       </Route>
-      <Route path="*" Component={_404} />
     </Routes>
   );
 };

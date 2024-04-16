@@ -14,7 +14,10 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action: PayloadAction<string>) => {
-      Cookies.set("accessToken", action.payload);
+      Cookies.set("accessToken", action.payload, {
+        expires: 1,
+        sameSite: "strict",
+      });
       state.accessToken = action.payload;
       state.error = null;
     },
