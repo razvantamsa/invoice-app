@@ -29,7 +29,7 @@ const InvoiceTable: React.FC = () => {
       return getInvoices({
         accessToken: accessToken || "",
         offset,
-        limit: offset + PAGE_SIZE,
+        limit: PAGE_SIZE,
       });
     },
     {
