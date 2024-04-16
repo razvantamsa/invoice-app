@@ -5,13 +5,16 @@ import InvoiceItem from "./InvoiceItem";
 import { Invoice } from "./invoice.interface";
 import PaginationItem from "./PaginationItem";
 
+const PAGE_SIZE = 5;
+
 const InvoiceTable: React.FC = () => {
   const [offset, setOffset] = useState<number>(0);
   const [invoices, setInvoices] = useState<Invoice[]>([]);
 
   useEffect(() => {
-    setInvoices(testInvoices);
-  }, []);
+    const fetchedInvoices = [...testInvoices].slice(offset, offset + PAGE_SIZE);
+    setInvoices(fetchedInvoices);
+  }, [offset]);
 
   return (
     <div className="invoice-table-container">
@@ -27,12 +30,12 @@ const InvoiceTable: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {invoices.slice(offset, offset + 10).map((invoice) => (
+          {invoices.map((invoice) => (
             <InvoiceItem key={invoice.id} invoice={invoice} />
           ))}
         </tbody>
       </table>
-      <PaginationItem />
+      <PaginationItem offset={offset} setOffset={setOffset} />
     </div>
   );
 };
