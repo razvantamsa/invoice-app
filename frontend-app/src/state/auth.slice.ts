@@ -14,19 +14,26 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action: PayloadAction<string>) => {
-      console.log(state, action);
+      Cookies.set("accessToken", action.payload, {
+        expires: 1,
+        sameSite: "none",
+      });
       state.accessToken = action.payload;
       state.error = null;
     },
     loginFailure: (state, action: PayloadAction<string>) => {
-      console.log(state, action);
       state.accessToken = null;
       state.error = action.payload;
+    },
+    logout: (state) => {
+      Cookies.remove("accessToken");
+      state.accessToken = null;
+      state.error = null;
     },
   },
 });
 
 const authReducer = authSlice.reducer;
 
-export const { loginSuccess, loginFailure } = authSlice.actions;
+export const { loginSuccess, loginFailure, logout } = authSlice.actions;
 export default authReducer;

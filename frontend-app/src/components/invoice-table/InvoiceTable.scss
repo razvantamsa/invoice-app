@@ -1,0 +1,14 @@
+.invoice-table-container {
+  width: 80%;
+
+  .invoice-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    .invoice-table-head th {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 2px solid var(--purple-200);
+    }
+  }
+}

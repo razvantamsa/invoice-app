@@ -15,7 +15,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ authRequired }) => {
   }
 
   if (accessToken && !authRequired) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/invoice" replace />;
   }
 
   return <Outlet />;

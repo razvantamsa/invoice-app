@@ -20,4 +20,36 @@ const loginUser = async ({
   return response.json();
 };
 
-export default loginUser;
+const getInvoices = async ({
+  accessToken,
+  offset,
+  limit,
+}: {
+  accessToken: string;
+  offset: number;
+  limit: number;
+}) => {
+  const response = await fetch(
+    `http://localhost:3000/invoices?offset=${offset}&limit=${limit}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      JSON.stringify({
+        statusText: response.statusText,
+        status: response.status,
+      })
+    );
+  }
+
+  return response.json();
+};
+
+export { loginUser, getInvoices };
