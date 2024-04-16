@@ -45,76 +45,26 @@ const invoices: Invoice[] = [
     status: "open",
     amount: 100,
   },
-  //   {
-  //     id: 2,
-  //     payee: "Amazon",
-  //     date: "2024-04-16",
-  //     description: "Invoice 2",
-  //     amount: 200,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
-  //   {
-  //     id: 3,
-  //     payee: "Amazon",
-  //     date: "2024-04-17",
-  //     description: "Invoice 3",
-  //     amount: 150,
-  //   },
 ];
+
+const InvoiceItem: React.FC<{ invoice: Invoice }> = ({ invoice }) => {
+  return (
+    <tr key={invoice.id} className="invoice-item">
+      <td>{invoice.id}</td>
+      <td>{invoice.payee}</td>
+      <td>{invoice.date}</td>
+      <td>{invoice.description}</td>
+      <td>${invoice.amount}</td>
+      <td>{invoice.status}</td>
+    </tr>
+  );
+};
 
 const InvoiceTable: React.FC = () => {
   return (
     <div className="invoice-table-container">
-      <table>
-        <thead>
+      <table className="invoice-table">
+        <thead className="invoice-table-head">
           <tr>
             <th>ID</th>
             <th>Payee</th>
@@ -126,14 +76,7 @@ const InvoiceTable: React.FC = () => {
         </thead>
         <tbody>
           {invoices.map((invoice) => (
-            <tr key={invoice.id}>
-              <td>{invoice.id}</td>
-              <td>{invoice.payee}</td>
-              <td>{invoice.date}</td>
-              <td>{invoice.description}</td>
-              <td>${invoice.amount}</td>
-              <td>{invoice.status}</td>
-            </tr>
+            <InvoiceItem key={invoice.id} invoice={invoice} />
           ))}
         </tbody>
       </table>
