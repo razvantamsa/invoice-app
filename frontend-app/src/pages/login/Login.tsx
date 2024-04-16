@@ -14,7 +14,7 @@ const Login: React.FC = () => {
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
       console.log("Login successful:", data);
-      dispatch(loginSuccess(data.accessToken));
+      dispatch(loginSuccess(data.access_token));
     },
     onError: (error: { message: string }) => {
       console.error("Login error:", error);
