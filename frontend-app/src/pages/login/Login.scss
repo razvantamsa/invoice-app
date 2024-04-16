@@ -8,22 +8,22 @@
   background-color: #f4f4f4;
   border-radius: 5rem;
   color: var(--purple-900);
+  padding: 20px;
 
   h2 {
     text-align: center;
-    margin-bottom: 20px;
   }
 
   form {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 100%;
     width: 100%;
 
     .form-group {
       width: 80%;
-      align-self: center;
 
       display: flex;
       flex-direction: column;
@@ -40,28 +40,31 @@
         padding: 10px;
         border-radius: 4px;
         border: 1px solid #ccc;
-        background-color: #ccc;
+        background-color: var(--purple-100);
         box-sizing: border-box;
+      }
+    }
+
+    .login-button {
+      width: 80%;
+      height: min(100%, 50px);
+
+      margin-top: 30px;
+      padding: 10px;
+      background-color: var(--purple-800);
+      color: #ffffff;
+      font-size: large;
+      border: none;
+      border-radius: 4px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: var(--purple-900);
       }
     }
   }
 
-  .login-button {
-    box-sizing: border-box;
-
-    width: 50%;
-    height: min(100%, 50px);
-    align-self: center;
-
-    padding: 10px;
-    background-color: var(--purple-800);
-    color: #ffffff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: var(--purple-900);
-    }
+  .login-error {
+    color: red;
   }
 }

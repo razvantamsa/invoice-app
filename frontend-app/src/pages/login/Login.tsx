@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "./Login.scss";
 import { loginUser } from "../../utils/requests";
 import { loginFailure, loginSuccess } from "../../state/auth.slice";
 import Navbar from "../../components/navbar/Navbar";
+import IState from "../../state/state.interface";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+
+  const { error } = useSelector((state: IState) => state.auth);
   const dispatch = useDispatch();
 
   const mutation = useMutation(loginUser, {
@@ -55,9 +58,11 @@ const Login: React.FC = () => {
           />
         </div>
         <button type="submit" className="login-button" onClick={handleSubmit}>
-          Login
+          Submit
         </button>
       </form>
+
+      {error && <div className="login-error">{error}</div>}
     </div>
   );
 };
