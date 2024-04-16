@@ -6,7 +6,7 @@ interface ErrorBoundaryPageProps {
 }
 
 const ErrorBoundaryPage: React.FC<ErrorBoundaryPageProps> = ({ errorInfo }) => {
-  console.log("here", errorInfo?.componentStack);
+  console.log(errorInfo?.componentStack);
   return (
     <div className="error-container">
       <h1>Something went wrong...</h1>

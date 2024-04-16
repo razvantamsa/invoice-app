@@ -1,39 +1,24 @@
 import React, { useState } from "react";
 import { useMutation } from "react-query";
+import { useDispatch } from "react-redux";
+
 import "./Login.scss";
-
-const loginUser = async ({
-  email,
-  password,
-}: {
-  email: string;
-  password: string;
-}) => {
-  const response = await fetch("http://localhost:3000/auth/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ username: email, password }),
-  });
-
-  if (!response.ok) {
-    throw new Error("Login failed");
-  }
-
-  return response.json();
-};
+import loginUser from "../../utils/requests";
+import { loginFailure, loginSuccess } from "../../state/auth.slice";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const dispatch = useDispatch();
 
   const mutation = useMutation(loginUser, {
     onSuccess: (data) => {
       console.log("Login successful:", data);
+      dispatch(loginSuccess(data.access_token));
     },
-    onError: (error) => {
+    onError: (error: { message: string }) => {
       console.error("Login error:", error);
+      dispatch(loginFailure(error.message));
     },
   });
 
