@@ -21,18 +21,15 @@ const prisma = new PrismaClient({
 });
 
 async function seedUsers(): Promise<User[]> {
-  const numberOfUsers = Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+  const numberOfUsers = 50;
   console.log(`Seeding ${numberOfUsers} users... \n\n\n\n`);
 
   const usersSeeded: User[] = [];
-
   for (let i = 0; i < numberOfUsers; i++) {
-    const uuid: string = uuidv4();
-
     const user: User = await prisma.user.create({
       data: {
-        email: `user${uuid}@example.com`,
-        name: `User ${uuid}`,
+        email: `user${i}@example.com`,
+        name: `User ${i}`,
         password: await BcryptUtils.hashPassword(
           'password',
           parseInt(BCRYPT_SALTROUNDS),
@@ -49,7 +46,7 @@ async function seedUsers(): Promise<User[]> {
 }
 
 async function seedInvoices(users: User[]) {
-  const numberOfInvoices = Math.floor(Math.random() * (2000 - 200 + 1)) + 200;
+  const numberOfInvoices = 5000;
   console.log(`Seeding ${numberOfInvoices} invoices... \n\n\n\n`);
 
   for (let i = 0; i < numberOfInvoices; i++) {
