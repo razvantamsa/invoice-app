@@ -3,7 +3,7 @@ import { useMutation } from "react-query";
 import { useDispatch } from "react-redux";
 
 import "./Login.scss";
-import loginUser from "../../utils/requests";
+import { loginUser } from "../../utils/requests";
 import { loginFailure, loginSuccess } from "../../state/auth.slice";
 import Navbar from "../../components/navbar/Navbar";
 
