@@ -1,0 +1,9 @@
+.navbar {
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  background-color: #ffffff; /* Background color */
+  height: 60px; /* Set a fixed height */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
