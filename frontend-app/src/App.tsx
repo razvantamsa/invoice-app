@@ -1,15 +1,15 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import Invoice from "./pages/Invoice";
 import Home from "./pages/home/Home";
 import _404 from "./pages/404/404";
 import Login from "./pages/login/Login";
-import useAuth from "./auth/useAuth";
+import IState from "./state/state.interface";
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
-  const accessToken = useAuth(navigate);
+  const accessToken = useSelector((state: IState) => state.auth.accessToken);
 
   return (
     <Routes>
