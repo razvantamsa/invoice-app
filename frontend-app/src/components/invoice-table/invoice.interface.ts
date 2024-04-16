@@ -1,8 +1,8 @@
 export interface Invoice {
-  id: number;
+  id: string;
   vendor_name: string;
   due_date: string;
-  description: string;
+  description: string | undefined;
   amount: number;
   paid: boolean;
 }

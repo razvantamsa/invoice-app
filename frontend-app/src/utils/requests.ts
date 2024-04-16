@@ -52,4 +52,31 @@ const getInvoices = async ({
   return response.json();
 };
 
-export { loginUser, getInvoices };
+const getInvoice = async ({
+  id,
+  accessToken,
+}: {
+  id: string;
+  accessToken: string;
+}) => {
+  const response = await fetch(`http://localhost:3000/invoices/${id}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error(
+      JSON.stringify({
+        statusText: response.statusText,
+        status: response.status,
+      })
+    );
+  }
+
+  return response.json();
+};
+
+export { loginUser, getInvoices, getInvoice };

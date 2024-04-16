@@ -68,8 +68,6 @@ const InvoiceTable: React.FC = () => {
           <tr>
             <th>ID</th>
             <th>Vendor</th>
-            <th>Due Date</th>
-            <th>Description</th>
             <th>Amount</th>
             <th>Status</th>
           </tr>

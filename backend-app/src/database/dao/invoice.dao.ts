@@ -14,11 +14,17 @@ export class InvoiceDAO {
     userId: string,
     offset: number,
     limit: number,
-  ): Promise<Invoice[]> {
+  ): Promise<Partial<Invoice>[]> {
     return this.prisma.invoice.findMany({
       where: { user_id: userId },
       skip: offset,
       take: limit,
+      select: {
+        id: true,
+        vendor_name: true,
+        amount: true,
+        paid: true,
+      },
     });
   }
 
